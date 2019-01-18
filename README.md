@@ -1,3 +1,5 @@
+![](https://img.shields.io/github/issues-pr/han801102/warm-package.svg)
+
 # Warm Package 手機暖暖包
 這是一個使用 Kotlin 語言撰寫的 Android 專案，此 App 的功能是在畫面上顯示現在的電池溫度，你可以使用 Seekbar 調整想要讓手機發燙到幾度，按了 Float Action Button 後 App 就會開始做事情讓手機發燙，發燙期間你可以離開應用程式，它會在 Service 繼續發燙，你也可以隨時透過 Notification 的資訊得知目前發燙的進度和點擊進入 App 停止程序。
 
