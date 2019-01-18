@@ -34,5 +34,11 @@ class WarmPackagePresenterTest {
         verify(warmPackageView).initUIStatus()
     }
 
+    @Test
+    fun closeService_callModelCloseService() {
+        mainPresenter.closeService()
+        verify(warmPackageModel).closeService()
+    }
+
     private fun <T> any(): T = Mockito.any<T>()
 }
