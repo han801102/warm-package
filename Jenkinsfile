@@ -30,7 +30,6 @@ def updateGithubCommitStatus(build) {
 }
 
 pipeline {
-    agent any
     stages {
         stage('Test') {
             steps {
