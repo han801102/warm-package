@@ -39,7 +39,7 @@ pipeline {
     }
     post {
         always {
-            junit "**/TEST-*.xml"
+            junit '**/TEST-*.xml'
         }
         success {
             setBuildStatus("Build succeeded", "SUCCESS");
