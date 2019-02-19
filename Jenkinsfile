@@ -21,4 +21,7 @@ pipeline {
             junit '**/TEST-*.xml'
         }
     }
+    options {
+        overrideIndexTriggers(true)
+    }
 }
