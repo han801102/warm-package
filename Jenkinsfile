@@ -9,10 +9,16 @@ pipeline {
                 sh './gradlew app:testDebugUnitTest'
             }
         }
+        stage('Lint') {
+            steps {
+                sh './gradlew lintDebug'
+            }
+        }
     }
     post {
         always {
             junit '**/TEST-*.xml'
+            androidLint pattern: '**/lint-results-*.xml'
         }
     }
 }
