@@ -1,52 +1,18 @@
-def getRepoURL() {
-  sh "git config --get remote.origin.url > .git/remote-url"
-  return readFile(".git/remote-url").trim()
-}
-
-def getCommitSha() {
-  sh "git rev-parse HEAD > .git/current-commit"
-  return readFile(".git/current-commit").trim()
-}
-
-def updateGithubCommitStatus(build) {
-  // workaround https://issues.jenkins-ci.org/browse/JENKINS-38674
-  repoUrl = getRepoURL()
-  commitSha = getCommitSha()
-
-  step([
-    $class: 'GitHubCommitStatusSetter',
-    reposSource: [$class: "ManuallyEnteredRepositorySource", url: repoUrl],
-    commitShaSource: [$class: "ManuallyEnteredShaSource", sha: commitSha],
-    errorHandlers: [[$class: 'ShallowAnyErrorHandler']],
-    statusResultSource: [
-      $class: 'ConditionalStatusResultSource',
-      results: [
-        [$class: 'BetterThanOrEqualBuildResult', result: 'SUCCESS', state: 'SUCCESS', message: build.description],
-        [$class: 'BetterThanOrEqualBuildResult', result: 'FAILURE', state: 'FAILURE', message: build.description],
-        [$class: 'AnyBuildResult', state: 'FAILURE', message: 'Loophole']
-      ]
-    ]
-  ])
-}
-
 pipeline {
-    agent any
+    agent any
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
     stages {
         stage('Test') {
             steps {
-                sh ./gradlew app:testDebugUnitTest
+                sh './gradlew app:testDebugUnitTest'
             }
         }
     }
     post {
         always {
-            junit "**/TEST-*.xml"
-        }
-        success {
-            setBuildStatus("Build succeeded", "SUCCESS");
-        }
-        failure {
-            setBuildStatus("Build failed", "FAILURE");
+            junit '**/TEST-*.xml'
         }
     }
 }
