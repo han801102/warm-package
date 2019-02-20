@@ -21,7 +21,9 @@ pipeline {
             junit '**/TEST-*.xml'
         }
     }
-    options {
-        overrideIndexTriggers(true)
-    }
+    properties([
+        pipelineTriggers([
+            cron('H/5 * * * *')
+        ])
+    ])
 }
