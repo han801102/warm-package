@@ -23,7 +23,7 @@ pipeline {
     }
     properties([
         pipelineTriggers([
-            cron('H/5 * * * *')
+            cron('H/15 * * * *')
         ])
     ])
 }
