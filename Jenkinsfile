@@ -21,7 +21,4 @@ pipeline {
             junit '**/TEST-*.xml'
         }
     }
-    properties([
-        pipelineTriggers([[$class: "TimerTrigger", spec: "H/15 * * * *"]])
-    ])
 }
