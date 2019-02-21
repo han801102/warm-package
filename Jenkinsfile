@@ -22,8 +22,6 @@ pipeline {
         }
     }
     properties([
-        pipelineTriggers([
-            cron('H/5 * * * *')
-        ])
+        pipelineTriggers([[$class: "TimerTrigger", spec: "H/15 * * * *"]])
     ])
 }
