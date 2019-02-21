@@ -22,8 +22,8 @@ pipeline {
         }
     }
     properties([
-        pipelineTriggers([
-            cron('H/5 * * * *')
+        pipelinerTiggers([
+            cron('H/20 * * * *')
         ])
     ])
 }
