@@ -30,7 +30,7 @@ class MainPresenter(view: WarmPackageView): WarmPackagePresenter {
     }
 
     override fun initial() {
-        model?.setTemperatureSensorUpdateListener(temperatureUpdateListener)
+//        model?.setTemperatureSensorUpdateListener(temperatureUpdateListener)
         view?.initUIStatus()
     }
 
