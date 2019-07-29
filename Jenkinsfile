@@ -7,28 +7,19 @@ pipeline {
         JAVA_HOME = "/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home"
     }
     stages {
-        stage('Clean') {
-            steps {
-                sh './gradlew clean'
-
-            }
-        }
         stage('Test') {
             steps {
+                sh './gradlew clean'
                 sh './gradlew app:testDebugUnitTest'
+                junit '**/TEST-*.xml'
 
             }
         }
         stage('Lint') {
             steps {
                 sh './gradlew lintDebug'
+                androidLint pattern: '**/lint-results-*.xml'
             }
-        }
-    }
-    post {
-        always {
-            junit '**/TEST-*.xml'
-            androidLint pattern: '**/lint-results-*.xml'
         }
     }
 }
