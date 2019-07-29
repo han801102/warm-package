@@ -3,6 +3,9 @@ pipeline {
     triggers {
         pollSCM('H/5 * * * *')
     }
+    environment {
+        JAVA_HOME = "/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home"
+    }
     stages {
         stage('Clean') {
             steps {
